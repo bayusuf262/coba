@@ -1,0 +1,121 @@
+{% load static %}
+{% load i18n static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Login | My BCAS Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    }
+    @media only screen and (min-width: 769px) {
+ .login-form{
+  margin-inline: 80px ;
+ }
+}
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md d-none  d-md-block d-lg-block d-xl-block  mx-auto">
+        <div class="form-container2">
+          <img src="{% static 'portal_logo.png' %}" alt="portal_logo" style="height: 180px;">
+        </div>
+        <div class="fixed-bottom p-4">
+          <p style="word-wrap: break-word;">
+            Copyright PT Bank BCA Syariah 2023. All Rights Reserved
+          </p>
+        </div>
+      </div>
+      <div class="col-md form-container" style="background-color: #0066AE;">
+        <div class="card login-form"  style="border-radius: 20px; padding: 30px; ">
+          <div class="bg-white mt-3 mx-4">
+            <img src="{% static 'bcas.png' %}" alt="BCAS Logo" class="img-fluid">
+          </div>
+          <div class="card-body mt-3">
+            {% if form.errors and not form.non_field_errors %}
+            <p class="errornote">
+              {% if form.errors.items|length == 1 %}{% translate "Please correct the error below." %}
+              {% else %}{% translate "Please correct the errors below." %}
+              {% endif %}
+            </p>
+            {% endif %}
+
+        
+            {% if user.is_authenticated %}
+            <p class="errornote">
+            {% blocktranslate trimmed %}
+            Kamu telah login, namun kamu tidak memiliki akses ke halaman ini, login dengan akun lain? atau  <a href="/">klik disini untuk kembali ke home</a>
+            {% endblocktranslate %}
+            </p>
+            {% endif %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form method="post">
+              {% csrf_token %}
+              {% if form.errors %}
+              <div class="alert alert-danger" role="alert">
+                Invalid username or password!
+              </div>
+              {% endif %}
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" class="form-control" id="username" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="form-control" id="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block rounded-pill"
+                style="height: 50px; margin-top: 36px;">Login</button>
+            </form>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+      // Add custom scripts here
+  </script>
+</body>
+
+</html>

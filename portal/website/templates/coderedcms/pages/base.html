@@ -1,0 +1,29 @@
+{% extends "coderedcms/pages/base.html" %}
+{% load static %}
+{% block custom_assets %}
+{# Add your custom CSS here #}
+<link rel="stylesheet" href="{% static 'website/css/custom.css' %}">
+{% endblock %}
+{% block custom_scripts %}
+{# Add your custom JavaScript here, or delete the line below if you don't need any #}
+<script src="{% static 'website/js/custom.js' %}"></script>
+<script>	
+var timeDisplay = document.getElementById("time");
+var dateDisplay = document.getElementById("date");
+
+function refreshTime() {
+  var today = new Date();
+
+var dayName =['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+var day = dayName[new Date().getDay()];
+  var date = day + ", " + today.getDate()+'-'+(today.getMonth()+1)+'-'+ today.getFullYear();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  timeDisplay.innerHTML = time;
+  dateDisplay.innerHTML= date;
+}
+
+setInterval(refreshTime, 1000);
+ 
+
+</script>
+{% endblock %}

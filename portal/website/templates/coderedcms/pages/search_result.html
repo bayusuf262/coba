@@ -1,0 +1,21 @@
+{% load coderedcms_tags %}
+{% load static %}
+
+
+
+<div class="card mb-3 rounded bg-light">
+    <div class="row no-gutters">
+      <div class="col-md-4  d-flex align-items-center">
+        <img src="{% static 'pdf-2.png' %}" class=" px-3 card-img" alt="Thumbnail Image">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title mb-4" style="font-weight: 900 !important;">{{page.title}}</h5>
+          <p style="text-align: justify;">Published at: {{page.first_published_at}}</p>
+          <div class="float-end p-3 mt-4" >
+            <a href="{{page.url}}" class="btn btn-primary rounded-pill" style="width: 120px !important;background-color: #1070b7 !important; text-align: center  !important;;">Lihat</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

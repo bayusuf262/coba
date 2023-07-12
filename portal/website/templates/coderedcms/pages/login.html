@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login | My BCAS Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+      img {
+          max-width: 100%;
+          height: auto;
+        }
+      .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>  
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6  d-md-none d-lg-block mx-auto form-container">
+          <div class="card">
+            <div class="card-header">
+              <img src="{% static 'bcas.png' %}" alt="BCAS Logo" class="img-fluid">
+              <h3 class="text-center">Login My BCA aa Syariah Portal</h3>
+            </div>
+            <div class="card-body">
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+              <form method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                  <div class="alert alert-danger" role="alert">
+                    Invalid username or password!
+                  </div>
+                {% endif %}
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" name="username" class="form-control" id="username" required>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password:</label>
+                  <input type="password" name="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+      // Add custom scripts here
+    </script>
+  </body>
+</html>
